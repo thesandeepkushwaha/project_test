@@ -21,7 +21,27 @@
   </div>
   <div class="form-group">
     <label for="city">City</label>
-    <input type="input" class="form-control"  name="city" placeholder="Enter City" value="<?php echo $news_item['city'] ?>">
+    <select class="form-control" id="city" name="city" style="width:100% auto;"> 
+   <option value="<?php echo $news_item['city'] ?>">
+   <?php 
+      $cities =  $this->db->get_where('city', array('id' => $news_item['city']));
+      if($cities->num_rows() > 0){
+        foreach($cities->result() as $city){
+          echo $city->name;
+        }
+      }
+    ?>
+    </option>;
+      <?php 
+          $cities = $this->db->get('city');
+          if($cities->num_rows() > 0){
+            foreach($cities->result() as $city){
+              echo '<option value="'.$city->id.'">'.$city->name.'</option>';
+            }
+          }
+        
+        ?>
+    </select>
   </div>
   <div class="form-group">
     <label for="date">Date</label>

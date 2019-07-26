@@ -24,7 +24,15 @@
             <td><?php echo $news_item['phone_no']; ?></td>
             <td><?php echo $news_item['email']; ?></td>
             <td><?php echo $news_item['address']; ?></td>
-            <td><?php echo $news_item['city']; ?></td>
+            <td>
+            <?php 
+              $cities =  $this->db->get_where('city', array('id' => $news_item['city']));
+                  if($cities->num_rows() > 0){
+                    foreach($cities->result() as $city){
+                      echo $city->name;
+                    }
+                  } ?>
+            </td>
             <td><?php echo $news_item['date']; ?></td>
             <td>
                 <a href="<?php echo site_url('leads/new_view/'.$news_item['sno']); ?>">View</a> | 
